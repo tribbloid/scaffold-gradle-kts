@@ -23,7 +23,7 @@ plugins {
 
     `maven-publish`
 
-    id("com.github.ben-manes.versions" ) version "0.39.0"
+    id("com.github.ben-manes.versions" ) version "0.42.0"
 }
 
 val rootID = vs.projectRootID
@@ -81,7 +81,7 @@ allprojects {
             scalaCompilerPlugins("io.tryp:splain_${vs.scalaV}:${vs.splainV}")
 
         testFixturesApi("org.scalatest:scalatest_${vs.scalaBinaryV}:${vs.scalatestV}")
-        testImplementation("org.junit.jupiter:junit-jupiter:5.6.2")
+        testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
     }
 
     task("dependencyTree") {
