@@ -1,3 +1,10 @@
 package org.tribbloid.scaffold
 
-class HelloSpec extends BaseSpec {}
+import org.tribbloid.scaffold.js.JSLinker
+
+class HelloSpec extends BaseSpec {
+
+  it("test1") {
+    JSLinker.linkOnce
+  }
+}

@@ -7,7 +7,7 @@ class Versions(self: Project) {
     val projectRootID = "shapesafe"
 
     val projectV = "0.1.0-SNAPSHOT"
-    val projectVMajor = projectV.removeSuffix("-SNAPSHOT")
+    val projectVBody = projectV.removeSuffix("-SNAPSHOT")
 //    val projectVComposition = projectV.split('-')
 
     val scalaGroup: String = self.properties.get("scalaGroup").toString()
@@ -23,5 +23,10 @@ class Versions(self: Project) {
 
     val splainV: String? = self.properties.get("splainVersion")?.toString()
 
-    val scalajsV: String? = self.properties.get("scalaJSVersion")?.toString()
+    val scalaJSV: String = "1.9.0"
+    val scalaJSVParts = scalaJSV.split('.')
+
+    val scalaJSVMajor: String = scalaJSVParts[0]
+    val scalaJSSuffix: String = "sjs${scalaJSVMajor}_${scalaBinaryV}"
+
 }

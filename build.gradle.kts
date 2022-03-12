@@ -76,6 +76,22 @@ allprojects {
             bothImpl("${vs.scalaGroup}:scala-reflect:${vs.scalaV}")
         }
 
+        // https://mvnrepository.com/artifact/io.github.classgraph/classgraph
+        bothImpl("io.github.classgraph:classgraph:4.8.141")
+
+
+        bothImpl("org.scala-js:scalajs-library_${vs.scalaBinaryV}:${vs.scalaJSV}")
+
+        bothImpl("org.scala-js:scalajs-linker_${vs.scalaBinaryV}:${vs.scalaJSV}")
+
+        bothImpl("org.scala-js:scalajs-dom_${vs.scalaJSSuffix}:2.1.0")
+
+        bothImpl("me.shadaj:slinky-core_${vs.scalaJSSuffix}:0.7.2")
+        bothImpl("me.shadaj:slinky-web_${vs.scalaJSSuffix}:0.7.2")
+
+        // https://mvnrepository.com/artifact/org.scala-js/scalajs-library
+        scalaCompilerPlugins("org.scala-js:scalajs-compiler_${vs.scalaV}:${vs.scalaJSV}")
+
         //https://github.com/tek/splain
         if (vs.splainV !=null)
             scalaCompilerPlugins("io.tryp:splain_${vs.scalaV}:${vs.splainV}")
@@ -103,19 +119,19 @@ allprojects {
                 loggingLevel = "verbose"
 
                 val compilerOptions = mutableListOf(
-                        "-encoding", "UTF-8",
-                        "-unchecked",
-                        "-deprecation",
-                        "-feature",
+                    "-encoding", "UTF-8",
+                    "-unchecked",
+                    "-deprecation",
+                    "-feature",
 
-                        "-language:higherKinds",
+                    "-language:higherKinds",
 //                            "-Xfatal-warnings",
 
-                        "-Xlint:poly-implicit-overload",
-                        "-Xlint:option-implicit",
+                    "-Xlint:poly-implicit-overload",
+                    "-Xlint:option-implicit",
 
 //                        "-Ydebug",
-                        "-Yissue-debug"
+                    "-Yissue-debug"
 //                    ,
 //                    "-Ytyper-debug",
 //                    "-Vtyper"
@@ -130,14 +146,11 @@ allprojects {
 
                 if (vs.splainV != null) {
                     compilerOptions.addAll(
-                            listOf(
-                                    //splain
-                                    "-P:splain:tree",
-                                    "-P:splain:breakinfix:200",
-                                    "-P:splain:bounds:true",
-                                    "-P:splain:boundsimplicits:true",
-                                    "-P:splain:keepmodules:2"
-                            )
+                        listOf(
+                            "-Vimplicits",
+                            "-Vimplicits-verbose-tree",
+                            "-Vtype-diffs"
+                        )
                     )
                 }
 
@@ -150,7 +163,7 @@ allprojects {
 
                     // this may be over the top but the test code in macro & core frequently run implicit search on church encoded Nat type
                     jvmArgs = listOf(
-                            "-Xss256m"
+                        "-Xss256m"
                     )
                 }
             }
@@ -226,22 +239,22 @@ allprojects {
         module {
 
             excludeDirs = excludeDirs + listOf(
-                    file(".gradle"),
-                    file(".github"),
+                file(".gradle"),
+                file(".github"),
 
-                    file ("target"),
+                file ("target"),
 //                        file ("out"),
 
-                    file(".idea"),
-                    file(".vscode"),
-                    file(".bloop"),
-                    file(".bsp"),
-                    file(".metals"),
-                    file(".ammonite"),
+                file(".idea"),
+                file(".vscode"),
+                file(".bloop"),
+                file(".bsp"),
+                file(".metals"),
+                file(".ammonite"),
 
-                    file("logs"),
+                file("logs"),
 
-                    file("spike")
+                file("spike")
             )
 
             isDownloadJavadoc = true

@@ -5,6 +5,6 @@ FWDIR="$(
   pwd
 )"
 
-${FWDIR}/gradlew wrapper --gradle-version=7.4
+${FWDIR}/gradlew wrapper --gradle-version=7.4.1
 
 ${FWDIR}/gradlew dependencyUpdates
