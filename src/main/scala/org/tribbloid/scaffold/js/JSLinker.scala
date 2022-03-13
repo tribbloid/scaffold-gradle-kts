@@ -54,8 +54,6 @@ object JSLinker {
       Paths.get(v)
     }
 
-    val rr = Thread.currentThread().getContextClassLoader.getResources(".")
-
     paths
 
   }
