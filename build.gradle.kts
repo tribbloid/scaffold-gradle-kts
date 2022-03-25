@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("ch.epfl.scala:gradle-bloop_2.12:1.4.8") // suffix is always 2.12, weird
+        classpath("ch.epfl.scala:gradle-bloop_2.12:1.4.13") // suffix is always 2.12, weird
     }
 }
 
@@ -17,7 +17,7 @@ plugins {
     `java-test-fixtures`
 
     scala
-    kotlin("jvm") version "1.5.10" // TODO: remove?
+    kotlin("jvm") version "1.6.10" // TODO: remove?
 
     idea
 
