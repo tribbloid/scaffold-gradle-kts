@@ -23,7 +23,7 @@ class Versions(self: Project) {
 
     val splainV: String? = self.properties.get("splainVersion")?.toString()
 
-    val scalaJSV: String = "1.9.0"
+    val scalaJSV: String = "1.10.0"
     val scalaJSVParts = scalaJSV.split('.')
 
     val scalaJSVMajor: String = scalaJSVParts[0]

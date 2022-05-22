@@ -7,7 +7,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("ch.epfl.scala:gradle-bloop_2.12:1.4.8") // suffix is always 2.12, weird
+        classpath("ch.epfl.scala:gradle-bloop_2.12:1.5.0") // suffix is always 2.12, weird
     }
 }
 
@@ -84,7 +84,7 @@ allprojects {
 
         bothImpl("org.scala-js:scalajs-linker_${vs.scalaBinaryV}:${vs.scalaJSV}")
 
-        bothImpl("org.scala-js:scalajs-dom_${vs.scalaJSSuffix}:2.1.0")
+        bothImpl("org.scala-js:scalajs-dom_${vs.scalaJSSuffix}:2.2.0")
 
         bothImpl("me.shadaj:slinky-core_${vs.scalaJSSuffix}:0.7.2")
         bothImpl("me.shadaj:slinky-web_${vs.scalaJSSuffix}:0.7.2")
