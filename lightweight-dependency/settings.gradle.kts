@@ -2,12 +2,9 @@
 
 
 include(":lightweight-dependency")
-project(":lightweight-dependency").projectDir = file("lightweight-dependency/module")
+project(":lightweight-dependency").projectDir = file("module")
 include(":lightweight-dependency:core")
 include(":lightweight-dependency:extra")
-
-include(":core")
-include(":extra")
 
 pluginManagement.repositories {
     gradlePluginPortal()

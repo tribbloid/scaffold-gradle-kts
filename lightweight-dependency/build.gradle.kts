@@ -92,41 +92,31 @@ allprojects {
                 loggingLevel = "verbose"
 
                 val compilerOptions = mutableListOf(
-                        "-encoding", "UTF-8",
-                        "-unchecked",
-                        "-deprecation",
-                        "-feature",
+                    "-encoding", "UTF-8",
+                    "-unchecked",
+                    "-deprecation",
+                    "-feature",
 
-                        "-language:higherKinds",
+                    "-language:higherKinds",
 //                            "-Xfatal-warnings",
 
-                        "-Xlint:poly-implicit-overload",
-                        "-Xlint:option-implicit",
+                    "-Xlint:poly-implicit-overload",
+                    "-Xlint:option-implicit",
 
-//                        "-Ydebug",
-                        "-Yissue-debug"
-//                    ,
-//                    "-Ytyper-debug",
-//                    "-Vtyper"
-
-//                    ,
-//                    "-Xlog-implicits",
-//                    "-Xlog-implicit-conversions",
-//                    "-Xlint:implicit-not-found",
-//                    "-Xlint:implicit-recursion"
+                    "-Yissue-debug"
 
                 )
 
                 if (!vs.splainV.isEmpty()) {
                     compilerOptions.addAll(
-                            listOf(
-                                    //splain
-                                    "-P:splain:tree",
-                                    "-P:splain:breakinfix:200",
-                                    "-P:splain:bounds:true",
-                                    "-P:splain:boundsimplicits:true",
-                                    "-P:splain:keepmodules:2"
-                            )
+                        listOf(
+                            //splain
+                            "-P:splain:tree",
+                            "-P:splain:breakinfix:200",
+                            "-P:splain:bounds:true",
+                            "-P:splain:boundsimplicits:true",
+                            "-P:splain:keepmodules:2"
+                        )
                     )
                 }
 
@@ -139,22 +129,11 @@ allprojects {
 
                     // this may be over the top but the test code in macro & core frequently run implicit search on church encoded Nat type
                     jvmArgs = listOf(
-                            "-Xss256m"
+                        "-Xss256m"
                     )
                 }
             }
         }
-
-//        kotlin {}
-// TODO: remove, kotlin is not in scope at the moment
-//
-//        withType<KotlinCompile> {
-//
-//
-//            kotlinOptions.jvmTarget = jvmTarget
-////            kotlinOptions.freeCompilerArgs += "-XXLanguage:+NewInference"
-//            // TODO: re-enable after kotlin compiler argument being declared safe
-//        }
 
         test {
 
@@ -215,22 +194,22 @@ allprojects {
         module {
 
             excludeDirs = excludeDirs + listOf(
-                    file(".gradle"),
-                    file(".github"),
+                file(".gradle"),
+                file(".github"),
 
-                    file ("target"),
+                file ("target"),
 //                        file ("out"),
 
-                    file(".idea"),
-                    file(".vscode"),
-                    file(".bloop"),
-                    file(".bsp"),
-                    file(".metals"),
-                    file(".ammonite"),
+                file(".idea"),
+                file(".vscode"),
+                file(".bloop"),
+                file(".bsp"),
+                file(".metals"),
+                file(".ammonite"),
 
-                    file("logs"),
+                file("logs"),
 
-                    file("lightweight-dependency")
+                file("spike")
             )
 
             isDownloadJavadoc = true
