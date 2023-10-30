@@ -1,5 +1,5 @@
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.KotlinBuildScript
+import org.gradle.kotlin.dsl.*
 
 /**
  * Configures the current project as a Kotlin project by adding the Kotlin `stdlib` as a dependency.
@@ -11,3 +11,9 @@ fun Project.versions(): Versions {
 
 
 fun KotlinBuildScript.dummy(): Unit {}
+
+fun Project.dummy2(): Unit {
+
+    idea {
+    }
+}
