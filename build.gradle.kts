@@ -5,11 +5,24 @@ buildscript {
     }
 
     dependencies {
-        classpath("ch.epfl.scala:gradle-bloop_2.12:1.4.13") // suffix is always 2.12, weird
+        classpath("ch.epfl.scala:gradle-bloop_2.12:1.6.1") // suffix is always 2.12, weird
     }
 }
 
+plugins {
 
-apply(plugin = "ai.acyclic.java-conventions")
-apply(plugin = "ai.acyclic.scala-conventions")
-apply(plugin = "ai.acyclic.publish-conventions")
+    id("ai.acyclic.java-conventions")
+    id("ai.acyclic.scala-conventions")
+    id("ai.acyclic.publish-conventions")
+}
+
+idea {
+
+    module {
+
+        excludeDirs = excludeDirs + listOf(
+
+            file("lightweight-dependency")
+        )
+    }
+}

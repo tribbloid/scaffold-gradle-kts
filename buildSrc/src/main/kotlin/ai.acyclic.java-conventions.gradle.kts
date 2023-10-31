@@ -1,9 +1,11 @@
+import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import org.gradle.api.JavaVersion
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.scala.ScalaCompile
 import org.gradle.kotlin.dsl.*
 
 val vs = versions()
+val rootID = vs.projectRootID
 
 plugins {
 //    base
@@ -15,11 +17,15 @@ plugins {
     id("com.github.ben-manes.versions" )
 }
 
-val rootID = vs.projectRootID
+tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
+    filterConfigurations = Spec<Configuration> {
+        !it.name.startsWith("incrementalScalaAnalysis")
+    }
+}
 
 idea {
 
-    targetVersion = "2020"
+    targetVersion = "2023"
 
     module {
 
@@ -32,14 +38,8 @@ idea {
 
             file(".idea"),
             file(".vscode"),
-            file(".bloop"),
-            file(".bsp"),
-            file(".metals"),
-            file(".ammonite"),
 
-            file("logs"),
-
-            file("lightweight-dependency")
+            file("logs")
         )
 
         isDownloadJavadoc = true
@@ -53,9 +53,6 @@ allprojects {
     apply(plugin = "java-library")
     apply(plugin = "java-test-fixtures")
 
-    // apply(plugin = "bloop")
-    // DO NOT enable! In VSCode it will cause the conflict:
-    // Cannot add extension with name 'bloop', as there is an extension already registered with that name
 
     apply(plugin = "idea")
 

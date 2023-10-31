@@ -1,3 +1,4 @@
+import gradle.kotlin.dsl.accessors._4a36e2684fb0add6d136eaed132fc1f4.idea
 import org.gradle.api.JavaVersion
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.scala.ScalaCompile
@@ -9,6 +10,20 @@ plugins {
 
     id("ai.acyclic.java-conventions")
     scala
+}
+
+
+idea {
+
+    module {
+
+        excludeDirs = excludeDirs + listOf(
+            file(".bloop"),
+            file(".bsp"),
+            file(".metals"),
+            file(".ammonite"),
+        )
+    }
 }
 
 allprojects {
@@ -33,7 +48,7 @@ allprojects {
         }
 
         testFixturesApi("org.scalatest:scalatest_${vs.scala.binaryV}:${vs.scalaTestV}")
-        testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+        testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
     }
 
     val jvmTarget = JavaVersion.VERSION_1_8.toString()
