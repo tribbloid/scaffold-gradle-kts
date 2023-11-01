@@ -11,7 +11,6 @@ buildscript {
 
 plugins {
 
-    id("ai.acyclic.java-conventions")
     id("ai.acyclic.scala-conventions")
     id("ai.acyclic.publish-conventions")
 }

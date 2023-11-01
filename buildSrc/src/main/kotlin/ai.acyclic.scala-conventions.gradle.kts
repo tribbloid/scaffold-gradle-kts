@@ -1,4 +1,6 @@
 import gradle.kotlin.dsl.accessors._4a36e2684fb0add6d136eaed132fc1f4.idea
+import gradle.kotlin.dsl.accessors._4a36e2684fb0add6d136eaed132fc1f4.implementation
+import gradle.kotlin.dsl.accessors._4a36e2684fb0add6d136eaed132fc1f4.testFixturesImplementation
 import org.gradle.api.JavaVersion
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.scala.ScalaCompile
@@ -13,17 +15,11 @@ plugins {
 
 val vs = versions()
 
-idea {
-
-    module {
-
-        excludeDirs = excludeDirs + listOf(
-            file(".bloop"),
-            file(".bsp"),
-            file(".metals"),
-            file(".ammonite"),
-        )
-    }
+// see https://github.com/gradle/gradle/issues/13067
+// TODO: how do I move it into upstream plugins?
+fun DependencyHandler.bothImpl(dependencyNotation: Any): Unit {
+    implementation(dependencyNotation)
+    testFixturesImplementation(dependencyNotation)
 }
 
 allprojects {
@@ -36,27 +32,26 @@ allprojects {
 
     dependencies {
 
-        // see https://github.com/gradle/gradle/issues/13067
-        fun bothImpl(constraintNotation: Any) {
-            implementation(constraintNotation)
-            testFixturesImplementation(constraintNotation)
-        }
-
-        constraints {
-
-            bothImpl("${vs.scala.group}:scala-compiler:${vs.scala.v}")
-        }
+        bothImpl("${vs.scala.group}:scala-library:${vs.scala.v}")
+        bothImpl("${vs.scala.group}:scala-reflect:${vs.scala.v}")
+//        bothImpl("${vs.scala.group}:scala-compiler:${vs.scala.v}") // enable if low-level mutli-stage programming is required
 
         testFixturesApi("org.scalatest:scalatest_${vs.scala.binaryV}:${vs.scalaTestV}")
         testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+        testRuntimeOnly("co.helmethair:scalatest-junit-runner:0.2.0")
     }
 
-    val jvmTarget = JavaVersion.VERSION_1_8.toString()
+    scala {
+
+    }
 
     tasks {
 
         withType<ScalaCompile> {
 
+            val jvmTarget = vs.jvmTarget.toString()
+
+            sourceCompatibility = jvmTarget
             targetCompatibility = jvmTarget
 
             scalaCompileOptions.apply {
@@ -67,22 +62,21 @@ allprojects {
 
                 val compilerOptions = mutableListOf(
                     "-encoding", "UTF-8",
-                    "-unchecked",
-                    "-deprecation",
-                    "-feature",
 
+                    "-deprecation",
+                    "-unchecked",
+                    "-feature",
                     "-language:higherKinds",
-//                            "-Xfatal-warnings",
+                    "-language:existentials",
+
+                    "-Ywarn-value-discard",
+                    "-Ywarn-unused:imports",
+                    "-Ywarn-unused:implicits",
+                    "-Ywarn-unused:params",
+                    "-Ywarn-unused:patvars",
 
                     "-Xlint:poly-implicit-overload",
                     "-Xlint:option-implicit",
-
-//                        "-Ydebug",
-//                    "-Yissue-debug"
-//                    ,
-//                    "-Ytyper-debug",
-//                    "-Vtyper"
-
 //                    ,
 //                    "-Xlog-implicits",
 //                    "-Xlog-implicit-conversions",
@@ -94,12 +88,11 @@ allprojects {
                 if (!vs.splainV.isEmpty()) {
                     compilerOptions.addAll(
                         listOf(
-                            //splain
+                            "-Vimplicits",
+                            "-Vtype-diffs",
                             "-P:splain:tree",
-                            "-P:splain:breakinfix:200",
                             "-P:splain:bounds:true",
-                            "-P:splain:boundsimplicits:true",
-                            "-P:splain:keepmodules:2"
+                            "-P:splain:boundsimplicits:true"
                         )
                     )
                 }
@@ -141,6 +134,19 @@ allprojects {
                 // stdout is used for occasional manual verification
                 showStandardStreams = true
             }
+        }
+    }
+
+    idea {
+
+        module {
+
+            excludeDirs = excludeDirs + listOf(
+                file(".bloop"),
+                file(".bsp"),
+                file(".metals"),
+                file(".ammonite"),
+            )
         }
     }
 }

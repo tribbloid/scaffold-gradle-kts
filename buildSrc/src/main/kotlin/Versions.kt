@@ -1,3 +1,4 @@
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
 class Versions(private val self: Project) {
@@ -20,6 +21,8 @@ class Versions(private val self: Project) {
         val minorV: String = vParts[2]
     }
     val scala = Scala()
+
+    val jvmTarget = JavaVersion.VERSION_1_8
 
     val scalaTestV = "3.2.12"
     val splainV: String = self.properties["splainVersion"]?.toString() ?: ""

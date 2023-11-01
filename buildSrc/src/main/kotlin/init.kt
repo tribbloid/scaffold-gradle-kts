@@ -1,5 +1,6 @@
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.kotlin.dsl.*
 
@@ -16,35 +17,3 @@ fun Project.versions(): Versions {
 
     return Versions(this)
 }
-
-//fun Project.dummy2(): Unit {
-//
-//
-//    apply(plugin = "java")
-//    apply(plugin = "java-library")
-//    apply(plugin = "java-test-fixtures")
-//
-//    // apply(plugin = "bloop")
-//    // DO NOT enable! In VSCode it will cause the conflict:
-//    // Cannot add extension with name 'bloop', as there is an extension already registered with that name
-//
-//    apply(plugin = "scala")
-//    apply(plugin = "kotlin")
-//
-//    apply(plugin = "idea")
-//
-//    apply(plugin = "maven-publish")
-//
-//    dependencies {
-//        implementation("")
-//    }
-//
-//}
-//
-//
-//fun PluginDependenciesSpec.dummy3(): Unit {
-//
-//    idea.apply {
-//
-//    }
-//}

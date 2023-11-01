@@ -30,21 +30,9 @@ idea {
 
     module {
 
-        excludeDirs = excludeDirs + listOf(
-            file(".gradle"),
-            file(".github"),
-
-            file ("target"),
-//                        file ("out"),
-
-            file(".idea"),
-            file(".vscode"),
-
-            file("logs")
+        excludeDirs = excludeDirs + files(
+            "gradle",
         )
-
-        isDownloadJavadoc = true
-        isDownloadSources = true
     }
 }
 
@@ -53,7 +41,6 @@ allprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
     apply(plugin = "java-test-fixtures")
-
 
     apply(plugin = "idea")
 
@@ -72,14 +59,41 @@ allprojects {
         dependsOn("dependencies")
     }
 
-    val jvmTarget = JavaVersion.VERSION_1_8
-
     java {
+
+        val jvmTarget = vs.jvmTarget
 
         withSourcesJar()
         withJavadocJar()
 
         sourceCompatibility = jvmTarget
         targetCompatibility = jvmTarget
+    }
+
+    idea {
+
+        targetVersion = "2023"
+
+        module {
+
+            excludeDirs = excludeDirs + files(
+                "target",
+                "out",
+                "bin",
+
+
+                ".gradle",
+                ".idea",
+                ".vscode",
+                ".cache",
+                ".history",
+                ".lib",
+
+                "logs"
+            )
+
+            isDownloadJavadoc = true
+            isDownloadSources = true
+        }
     }
 }
