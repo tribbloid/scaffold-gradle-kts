@@ -25,4 +25,5 @@ repositories {
 dependencies {
 
     implementation("com.github.ben-manes.versions:com.github.ben-manes.versions.gradle.plugin:0.49.0")
+    implementation("io.github.gradle-nexus.publish-plugin:io.github.gradle-nexus.publish-plugin.gradle.plugin:1.3.0")
 }

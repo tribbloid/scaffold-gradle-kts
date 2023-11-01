@@ -4,7 +4,6 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.scala.ScalaCompile
 import org.gradle.kotlin.dsl.*
 
-val vs = versions()
 
 plugins {
 
@@ -12,6 +11,7 @@ plugins {
     scala
 }
 
+val vs = versions()
 
 idea {
 
@@ -78,7 +78,7 @@ allprojects {
                     "-Xlint:option-implicit",
 
 //                        "-Ydebug",
-                    "-Yissue-debug"
+//                    "-Yissue-debug"
 //                    ,
 //                    "-Ytyper-debug",
 //                    "-Vtyper"

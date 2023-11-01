@@ -4,9 +4,6 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.tasks.scala.ScalaCompile
 import org.gradle.kotlin.dsl.*
 
-val vs = versions()
-val rootID = vs.projectRootID
-
 plugins {
 //    base
     java
@@ -17,6 +14,10 @@ plugins {
     id("com.github.ben-manes.versions" )
 }
 
+val vs = versions()
+val rootID = vs.projectRootID
+
+// TODO: remove after https://github.com/ben-manes/gradle-versions-plugin/issues/816 resolved
 tasks.named<DependencyUpdatesTask>("dependencyUpdates").configure {
     filterConfigurations = Spec<Configuration> {
         !it.name.startsWith("incrementalScalaAnalysis")
@@ -71,8 +72,14 @@ allprojects {
         dependsOn("dependencies")
     }
 
+    val jvmTarget = JavaVersion.VERSION_1_8
+
     java {
+
         withSourcesJar()
         withJavadocJar()
+
+        sourceCompatibility = jvmTarget
+        targetCompatibility = jvmTarget
     }
 }
