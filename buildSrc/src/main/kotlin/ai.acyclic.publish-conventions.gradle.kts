@@ -38,7 +38,6 @@ if (sonatypeApiUser.isPresent && sonatypeApiKey.isPresent) {
 subprojects {
 
     apply(plugin = "signing")
-    apply(plugin = "maven-publish")
 
     // https://stackoverflow.com/a/66352905/1772342
 
@@ -57,6 +56,7 @@ subprojects {
         }
     }
 
+    apply(plugin = "maven-publish")
     publishing {
         val moduleID = if (project.name.startsWith(rootID)) project.name
         else rootID + "-" + project.name

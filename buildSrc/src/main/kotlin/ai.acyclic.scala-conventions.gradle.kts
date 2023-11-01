@@ -11,6 +11,7 @@ plugins {
 
     id("ai.acyclic.java-conventions")
     scala
+    id("io.github.cosmicsilence.scalafix")
 }
 
 val vs = versions()
@@ -62,6 +63,8 @@ allprojects {
 
                 val compilerOptions = mutableListOf(
                     "-encoding", "UTF-8",
+
+                    "-g:vars", // demand by json4s
 
                     "-deprecation",
                     "-unchecked",
@@ -134,6 +137,12 @@ allprojects {
                 // stdout is used for occasional manual verification
                 showStandardStreams = true
             }
+        }
+
+        apply(plugin = "io.github.cosmicsilence.scalafix")
+        scalafix {
+            semanticdb.autoConfigure.set(true)
+            semanticdb.version.set("4.8.11")
         }
     }
 
