@@ -1,0 +1,9 @@
+root = true
+
+[*]
+charset = utf-8
+
+[{*.bash,*.sh,*.zsh}]
+indent_size = 2
+tab_width = 2
+end_of_line = lf
