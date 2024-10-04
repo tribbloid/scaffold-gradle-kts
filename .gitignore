@@ -2,6 +2,9 @@
 *.log
 logs/**
 
+# maven
+*.versionsBackup
+
 # gradle
 **/.gradle/*
 **/build
@@ -46,6 +49,8 @@ project/plugins/project/
 .bloop/
 .metals/
 **/metals.sbt
+**/bin
+
 
 # the Singapore stack
 **/.ammonite/
@@ -58,3 +63,9 @@ output
 temp
 **/temp
 foo
+
+#aws key
+**/rootkey.csv
+
+#Doc
+**/.obsidian
