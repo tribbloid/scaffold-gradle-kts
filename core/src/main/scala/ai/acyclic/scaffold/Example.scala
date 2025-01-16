@@ -2,5 +2,7 @@ package ai.acyclic.scaffold
 
 object Example {
 
- dummy
+  val k = Seq(1,2,3)
+
+
 }
